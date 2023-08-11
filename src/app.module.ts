@@ -23,7 +23,12 @@ import { UserModule } from './user/user.module';
     {
       provide: APP_PIPE,
       useValue: new ValidationPipe({
-        whitelist: true,
+        whitelist: false,
+        transform: true,
+        transformOptions: {
+          strategy: 'exposeAll',
+        },
+        forbidUnknownValues: false,
       }),
     },
   ],
