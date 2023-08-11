@@ -9,10 +9,11 @@ import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 
 import { ConfigurationModule } from './modules/config/config.module';
 import { LoggerMiddleware } from './modules/logging/logger.middleware';
+import { UploadModule } from './upload/upload.module';
 import { UserModule } from './user/user.module';
 
 @Module({
-  imports: [ConfigurationModule, UserModule],
+  imports: [ConfigurationModule, UserModule, UploadModule],
   controllers: [],
   providers: [
     {
