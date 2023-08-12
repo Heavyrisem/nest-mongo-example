@@ -9,19 +9,25 @@ services:
   #     - db
   #   env_file:
   #     - .env.production
+  # db:
+  #   image: mysql
+  #   restart: always
+  #   ports:
+  #     - 33006:3306
+  #   volumes:
+  #     - db_volume:/var/lib/mysql
+  #     - ./mysql/config:/etc/mysql/conf.d
+  #     - ./mysql/config/init.sql:/data/application/init.sql
+  #   command: --init-file /data/application/init.sql
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: password
+  #     MYSQL_DATABASE: nest_db
+  #     time_zone: UTC
   db:
-    image: mysql
-    restart: always
+    image: mongo
     ports:
-      - 33006:3306
+      - 27017:27017
     volumes:
-      - db_volume:/var/lib/mysql
-      - ./mysql/config:/etc/mysql/conf.d
-      - ./mysql/config/init.sql:/data/application/init.sql
-    command: --init-file /data/application/init.sql
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: nest_db
-      time_zone: UTC
+      - db_volume:/data/db
 volumes:
   db_volume:

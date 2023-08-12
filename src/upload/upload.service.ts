@@ -21,8 +21,9 @@ export class UploadService {
   async uploadFile(file: Express.Multer.File) {
     const params: PutObjectCommandInput = {
       Bucket: this.configService.getOrThrow('AWS_BUCKET_NAME'), // 버킷 이름
-      Key: `${new Date().toISOString()}.${file.originalname}`, // 파일이름
+      Key: `${new Date().toISOString()}.${encodeURIComponent(file.originalname)}`, // 파일이름
       Body: file.buffer, // 파일 데이터
+      ContentType: file.mimetype,
     };
 
     await this.S3.send(new PutObjectCommand(params));
